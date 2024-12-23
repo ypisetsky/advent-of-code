@@ -13,7 +13,7 @@ def getblankseparated(day):
         return f.read().split("\n\n")
 
 
-def tokenedlines(day, collapse=True, sep=" "):
+def tokenedlines(day, collapse=True, sep=" ", tuplify=True):
     lines = getlines(day)
     ret = []
     for line in lines:
@@ -28,7 +28,7 @@ def tokenedlines(day, collapse=True, sep=" "):
                 except:
                     parsed_parts.append(part)
         ret.append(parsed_parts)
-    return ret
+    return tuple(ret) if tuplify else ret 
 
 
 def as_ints(arr):

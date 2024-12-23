@@ -1,4 +1,5 @@
 from collections import defaultdict
+from copy import copy
 
 def execute_one_inst(ip, mem, input_stream, output_stream):
     new_ip, state = execute_impl(ip, mem, input_stream, output_stream)
@@ -123,6 +124,15 @@ class Processor:
         ret = self.output
         self.output = []
         return ret
+    
+    def clone(self):
+        target = Processor([99], [])
+        target.ip = self.ip
+        target.memory = copy(self.memory)
+        target.status = self.status
+        target.output = self.output[:]
+        target.input = self.input[:]
+        return target
         
 
 def parse_opcode(encoded):
